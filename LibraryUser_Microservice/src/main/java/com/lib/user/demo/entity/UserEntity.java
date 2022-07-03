@@ -1,24 +1,39 @@
 package com.lib.user.demo.entity;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name="user")
+@Table(name="lib_user")
 public class UserEntity {
+
+	public List<AuthorEntity> getAuthorEntity() {
+		return authorEntity;
+	}
+
+	public void setAuthorEntity(List<AuthorEntity> authorEntity) {
+		this.authorEntity = authorEntity;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
-	private LocalTime createDate;
+	private LocalDateTime createDate;
 	private String mobile;
 	private String email;
+	
+	
+	@Transient
+	private List<AuthorEntity> authorEntity;
+	
 
 	public int getId() {
 		return id;
@@ -36,11 +51,11 @@ public class UserEntity {
 		this.name = name;
 	}
 
-	public LocalTime getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(LocalTime createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
 
