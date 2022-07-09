@@ -25,8 +25,8 @@ public class UserController {
 	UserService userService;
 	
 	
-	@Autowired
-	RestTemplate restTemplate;
+//	@Autowired
+//	RestTemplate restTemplate;
 	
 	
 	@RequestMapping("/saveUser")
@@ -51,12 +51,6 @@ public class UserController {
 		ApiResponse api = new ApiResponse();
 		
 		List<UserEntity> userEntity=userService.gateUserDetails();
-//		UserEntity entity = (UserEntity) userEntity;
-		List userEntitys =this.restTemplate.getForObject("http://localhost:8811/getAuthor",List.class );
-		userEntity.addAll(userEntitys);
-		//http://localhost:8811/getAuthor
-//		entity.setAuthorEntity(userEntitys);
-//		userEntity.add(entity);
 		api.setResponseMessgae("saved successfully..");
 		api.setResponseCode(200);
 		api.setResponseError(false);

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.lib.user.demo.dto.UserDto;
 import com.lib.user.demo.entity.UserEntity;
@@ -17,6 +18,10 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserReposistory reposistory;
+	
+	@Autowired
+	RestTemplate restTemplate;
+	
 	@Override
 	public UserEntity saveUserDetails(UserDto userDto) {
 		UserEntity entity = new UserEntity();
@@ -38,6 +43,9 @@ public class UserServiceImpl implements UserService{
 		entity.setMobile("8802292341");
 		LocalDateTime localTime =LocalDateTime.now();
 		entity.setCreateDate(localTime);
+		List userEntitys =this.restTemplate.getForObject("http://localhost:8811/getAuthor",List.class );
+		//http://localhost:8811/getAuthor
+		entity.setAuthorEntity(userEntitys);
 		userList.add(entity);
 		return userList;
 	}
